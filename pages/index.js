@@ -37,7 +37,9 @@ console.log({posts})
           {posts?.map(({title, id, slug, content}) => {
             return (
               <div className={styles.card}>
-                <Link href={{
+                <Link
+                key={id}
+                 href={{
                   pathname: "post/[slug]",
                   query: {
                       slug: slug,
