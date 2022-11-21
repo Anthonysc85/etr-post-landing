@@ -1,6 +1,5 @@
 
 export default function Post({post}) {
- console.log({post})
   return (
     <div className="post-content">
         <div dangerouslySetInnerHTML={{__html: post.content.rendered}}></div>
@@ -9,7 +8,7 @@ export default function Post({post}) {
 }
 
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const slug = params.slug
   const posts = await fetch(`https://www.expandtheroom.com/wp-json/wp/v2/posts?slug=${slug}`).then(res => res.json());
   return {

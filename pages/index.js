@@ -9,7 +9,7 @@ import Link from 'next/link'
 // This gets called on every request
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(`https://www.expandtheroom.com/wp-json/wp/v2/posts`)
+  const res = await fetch(`https://www.expandtheroom.com/wp-json/wp/v2/posts?per_page=20??page=2`)
   const posts = await res.json()
 
  
@@ -19,7 +19,7 @@ export async function getServerSideProps() {
 }
 
 export default function Home({posts}) {
-console.log({posts})
+
   return (
     <div className={styles.container}>
       <Head>
@@ -34,18 +34,12 @@ console.log({posts})
         </h1>
    
         <div className={styles.grid}>
-          {posts?.map(({title, id, slug, content}) => {
+          {posts?.map(({title, id, slug}) => {
             return (
-              <div className={styles.card}>
+              // eslint-disable-next-line react/jsx-key
+              <div  key={id} className={styles.card}>
                 <Link
-                key={id}
-                 href={{
-                  pathname: "post/[slug]",
-                  query: {
-                      slug: slug,
-                      content: content.rendered
-                      }}}
-                      as={`post/${slug}`}>{title.rendered}
+                 href={`post/${slug}`}>{title.rendered}
                 </Link>
               </div>
             )

@@ -36,3 +36,9 @@ a {
 .card-group {
   display: none;
 }
+
+.article-header a:first-child {
+  display: none;
+}
+
+figure
